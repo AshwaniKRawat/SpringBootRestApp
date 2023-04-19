@@ -1,42 +1,25 @@
-==================================
-install application into docker
-==================================
------------
-git command
------------
-
-git clone https://github.com/AshwaniKRawat/rest-web-service-docker.git
+git clone https://github.com/AshwaniKRawat/springbootwebapp.git
+cd springbootwebapp
+mvn clean compile package
 
 
-cd rest-web-service-docker
-ls -l
-
---------------
-Maven command
---------------
-mvn clean package
-ls -l target
-
---------------
-docker command
---------------
+====================================================================
+docker hub
+====================================================================
 
 docker images
 docker system prune -a
-docker build -t spring-boot-rest-service-mysql-docker-app .
+docker build -t springbootrestservicedockerapp .
 docker images
-docker run -d -p 9091:8080 spring-boot-rest-service-mysql-docker-app
+docker run -d -p 9091:8080 springbootrestservicedockerapp
 # Stop the container
 docker stop <container-id>
 docker ps
 
+
 ====================================================================
 pushing image into docker hub
 ====================================================================
-
-We have already build image into above steps
-docker build -t <image-name> .
-ex-  docker build -t spring-boot-rest-service-mysql-docker-app .
 
 # login into docker hub account from docker machine
 $ docker login
@@ -45,72 +28,145 @@ Note: Enter your docker hub account credentials.
 	
 # tag docker image
 docker tag <image-name> <tagname>
-Ex- docker tag spring-boot-rest-service-mysql-docker-app ashwanirawat/spring-boot-rest-service-mysql-docker-app
+docker tag springbootrestservicedockerapp ashwanirawat/springbootrestservicedockerapp
 
 
 # Push Docker image
-docker push ashwanirawat/spring-boot-rest-service-mysql-docker-app
 docker push ashwanirawat/springbootrestservicedockerapp
 
 pull from docker 
 docker pull <imagename>
-docker pull ashwanirawat/spring-boot-rest-service-mysql-docker-app
+docker pull ashwanirawat/springbootrestservicedockerapp
 
-No need to create image since I have already downloaded image from docker now need to start only
 
-docker run -d -p 9091:8080 spring-boot-rest-service-mysql-docker-app
 
-#witout mysql
-docker run -d -p 9090:8080 ashwanirawat/springbootrestservicedockerapp
-http://EC2-IP-Address:9090/welcome
 
 ====================================================================
-pushing image into Nexen Rep
+Kubernetes
 ====================================================================
-Pending
+----------------------------------------------------------------------------------Approach 1:-----------------------------------------------------------------------------
+# Delete all k8s components we have created 
+$ kubectl delete all --all
 
--Run Prod Profile from eclipse
--Dspring.profiles.active=prod
+-------------
+POD creation
+-------------
 
--Run mvn command by skipping test
-mvn clean compile package -Dmaven.test.skip=true
-	
-Run Prod Profile from prod	
-java -Dspring.profiles.active=prod -jar spring-boot-mysql.jar
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: javawebapppod
+  labels:
+    app: javawebapp
+spec:
+   containers:
+   - name: javawebappcontainer
+     image: ashwani/javawebapp
+     ports:
+      - containerPort: 8080
+...
 
 
-========================================================================Spring boot Application Rest API and MYSql Docker container Application ====================================================================================  
-==============================================================================================START==============================================================================================
-==================================
-install application into docker
-==================================
+file Name:  javawebapppod.yml
 
-docker system prune -a
-docker-compose down
-git clone https://github.com/AshwaniKRawat/rest-web-service-docker.git
-cd rest-web-service-docker
-mvn clean compile package -Dmaven.test.skip=true
-docker build -t spring-boot-rest-service-mysql-docker-app .
-docker images
-docker-compose up -d
-docker-compose ps
-docker logs <app-container-name>
+============
+K8S Service
+============
 
-To run from local
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: javawebapppod
+  labels:
+    app: javawebapp
+spec:
+   containers:
+   - name: javawebappcontainer
+     image: ashwanirawat/springbootrestservicedockerapp
+     ports:
+      - containerPort: 8080
+...
 
-http://hostname:8080/
-will return 
-/getAllUsers,/getUsers/{id},addUser,/getUsers/{id},/addUser
+file Name: javawebappsvc.yml
 
-====================================================================
-pushing image into docker hub
-====================================================================
-# tag docker image
-docker tag <image-name> <tagname>
-Ex- docker tag spring-boot-rest-service-mysql-docker-app ashwanirawat/spring-boot-rest-service-mysql-docker-app
+kubectl get pods
 
-# Push Docker image
-docker push ashwanirawat/spring-boot-rest-service-mysql-docker-app
-==============================================================================================END==============================================================================================
-	
+# Create PODS using pod-manifest
+$ kubectl apply -f <pod-yml>
+kubectl apply -f javawebapppod.yml
 
+# Create service using service-manifest
+kubectl apply -f javawebappsvc.yml
+
+kubectl get pods
+NAME            READY   STATUS    RESTARTS   AGE
+javawebapppod   1/1     Running   0          2m15s
+
+kubectl get svc
+NAME            TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)        AGE
+javawebappsvc   NodePort    10.100.3.87   <none>        80:30028/TCP   3m10s
+
+# Check POD running in which Node
+$ kubectl get pods -o wide
+
+NAME            READY   STATUS    RESTARTS   AGE   IP               NODE                                            NOMINATED NODE   READINESS GATES
+javawebapppod   1/1     Running   0          16s   192.168.53.157   ip-192-168-43-195.ap-south-1.compute.internal   <none>           <none>
+
+
+# Descrie pod ( get more info about pod)
+$ kubectl describe pod <pod-name>
+kubectl describe pod javawebapppod
+
+============
+K8S Service
+============
+
+=> Kubernetes service is used to expose PODS outside cluster
+
+=> We have 3 types of K8S Services
+
+1) Cluster IP
+2) Node Port
+3) Load Balancer
+--------------------------------------------------------------------------------Approach 2:----------------------------------------------------------------------
+
+---------------------------------------------------------------------------------Node Port----------------------------------------------------------------------
+
+Now using Node Port
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: javawebappsvc
+spec:
+  type: NodePort
+  selector:
+    app: javawebapp # POD lable
+  ports:
+  - port: 80
+    targetPort: 8080
+...
+
+# Create PODS using pod-manifest
+$ kubectl apply -f <pod-yml>
+kubectl apply -f javawebapppod.yml
+
+# Create service using service-manifest
+kubectl apply -f javawebappsvc.yml
+
+Now 
+Note: We can see service information and Node Port Number assigned by K8S.
+
+ubuntu@ip-172-31-42-99:~/ASH/POD$ kubectl get svc
+NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+javawebappsvc   NodePort    10.100.135.64   <none>        80:31187/TCP   102s
+kubernetes      ClusterIP   10.100.0.1      <none>        443/TCP        5m33s
+
+Note: Enable Node Port number in security group of Worker node in which our POD is running.
+
+--------------------------------------------------------------------------------Approach 3:----------------------------------------------------------------------
+
+---------------------------------------------------------------------------------Cluster IP----------------------------------------------------------------------
