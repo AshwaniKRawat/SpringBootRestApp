@@ -1,0 +1,116 @@
+==================================
+install application into docker
+==================================
+-----------
+git command
+-----------
+
+git clone https://github.com/AshwaniKRawat/rest-web-service-docker.git
+
+
+cd rest-web-service-docker
+ls -l
+
+--------------
+Maven command
+--------------
+mvn clean package
+ls -l target
+
+--------------
+docker command
+--------------
+
+docker images
+docker system prune -a
+docker build -t spring-boot-rest-service-mysql-docker-app .
+docker images
+docker run -d -p 9091:8080 spring-boot-rest-service-mysql-docker-app
+# Stop the container
+docker stop <container-id>
+docker ps
+
+====================================================================
+pushing image into docker hub
+====================================================================
+
+We have already build image into above steps
+docker build -t <image-name> .
+ex-  docker build -t spring-boot-rest-service-mysql-docker-app .
+
+# login into docker hub account from docker machine
+$ docker login
+
+Note: Enter your docker hub account credentials.
+	
+# tag docker image
+docker tag <image-name> <tagname>
+Ex- docker tag spring-boot-rest-service-mysql-docker-app ashwanirawat/spring-boot-rest-service-mysql-docker-app
+
+
+# Push Docker image
+docker push ashwanirawat/spring-boot-rest-service-mysql-docker-app
+docker push ashwanirawat/springbootrestservicedockerapp
+
+pull from docker 
+docker pull <imagename>
+docker pull ashwanirawat/spring-boot-rest-service-mysql-docker-app
+
+No need to create image since I have already downloaded image from docker now need to start only
+
+docker run -d -p 9091:8080 spring-boot-rest-service-mysql-docker-app
+
+#witout mysql
+docker run -d -p 9090:8080 ashwanirawat/springbootrestservicedockerapp
+http://EC2-IP-Address:9090/welcome
+
+====================================================================
+pushing image into Nexen Rep
+====================================================================
+Pending
+
+-Run Prod Profile from eclipse
+-Dspring.profiles.active=prod
+
+-Run mvn command by skipping test
+mvn clean compile package -Dmaven.test.skip=true
+	
+Run Prod Profile from prod	
+java -Dspring.profiles.active=prod -jar spring-boot-mysql.jar
+
+
+========================================================================Spring boot Application Rest API and MYSql Docker container Application ====================================================================================  
+==============================================================================================START==============================================================================================
+==================================
+install application into docker
+==================================
+
+docker system prune -a
+docker-compose down
+git clone https://github.com/AshwaniKRawat/rest-web-service-docker.git
+cd rest-web-service-docker
+mvn clean compile package -Dmaven.test.skip=true
+docker build -t spring-boot-rest-service-mysql-docker-app .
+docker images
+docker-compose up -d
+docker-compose ps
+docker logs <app-container-name>
+
+To run from local
+
+http://hostname:8080/
+will return 
+/getAllUsers,/getUsers/{id},addUser,/getUsers/{id},/addUser
+
+====================================================================
+pushing image into docker hub
+====================================================================
+# tag docker image
+docker tag <image-name> <tagname>
+Ex- docker tag spring-boot-rest-service-mysql-docker-app ashwanirawat/spring-boot-rest-service-mysql-docker-app
+
+# Push Docker image
+docker push ashwanirawat/spring-boot-rest-service-mysql-docker-app
+==============================================================================================END==============================================================================================
+	
+

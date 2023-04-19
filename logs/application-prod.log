@@ -1,0 +1,126 @@
+2023-04-19 23:04:51,610 INFO  [restartedMain] com.ashwani.restwebservicedocker.SpringBootWebAppApplication : Starting SpringBootWebAppApplication using Java 17.0.5 on LAPTOP-SRD1UDTD with PID 28788 (C:\Data\Practice\MyWorkspace\Java_Workspace2023\springbootwebapp\target\classes started by Ashwani in C:\Data\Practice\MyWorkspace\Java_Workspace2023\springbootwebapp)
+2023-04-19 23:04:51,612 INFO  [restartedMain] com.ashwani.restwebservicedocker.SpringBootWebAppApplication : No active profile set, falling back to 1 default profile: "default"
+2023-04-19 23:04:51,687 INFO  [restartedMain] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-04-19 23:04:51,689 INFO  [restartedMain] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-04-19 23:04:52,517 INFO  [restartedMain] org.springframework.data.repository.config.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-19 23:04:52,520 INFO  [restartedMain] org.springframework.data.repository.config.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-04-19 23:04:52,535 INFO  [restartedMain] org.springframework.data.repository.config.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 JDBC repository interfaces.
+2023-04-19 23:04:52,545 INFO  [restartedMain] org.springframework.data.repository.config.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-19 23:04:52,548 INFO  [restartedMain] org.springframework.data.repository.config.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-19 23:04:52,560 INFO  [restartedMain] org.springframework.data.repository.config.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2 ms. Found 0 JPA repository interfaces.
+2023-04-19 23:04:53,508 INFO  [restartedMain] org.springframework.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 8080 (http)
+2023-04-19 23:04:53,519 INFO  [restartedMain] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2023-04-19 23:04:53,520 INFO  [restartedMain] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.73]
+2023-04-19 23:04:53,618 INFO  [restartedMain] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] : Initializing Spring embedded WebApplicationContext
+2023-04-19 23:04:53,618 INFO  [restartedMain] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1928 ms
+2023-04-19 23:04:53,680 INFO  [restartedMain] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
+2023-04-19 23:04:53,877 INFO  [restartedMain] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
+2023-04-19 23:04:53,888 INFO  [restartedMain] org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:694ee3fa-d1da-4f3d-8987-b205b3a71d95'
+2023-04-19 23:04:54,886 INFO  [restartedMain] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-19 23:04:55,016 WARN  [restartedMain] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-19 23:04:56,425 INFO  [restartedMain] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer : LiveReload server is running on port 35729
+2023-04-19 23:04:56,468 INFO  [restartedMain] org.springframework.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 8080 (http) with context path ''
+2023-04-19 23:04:56,486 INFO  [restartedMain] com.ashwani.restwebservicedocker.SpringBootWebAppApplication : Started SpringBootWebAppApplication in 5.378 seconds (JVM running for 6.04)
+2023-04-19 23:04:56,489 INFO  [restartedMain] com.ashwani.restwebservicedocker.controller.UserCommandLineRunner : ####################################################################################################
+2023-04-19 23:04:56,490 INFO  [restartedMain] com.ashwani.restwebservicedocker.controller.UserCommandLineRunner : run method -  User is initilized into DB   IN
+2023-04-19 23:04:56,491 INFO  [restartedMain] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : addUser() IN
+2023-04-19 23:04:56,491 INFO  [restartedMain] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : addUser() OUT
+2023-04-19 23:04:56,491 INFO  [restartedMain] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : addUser() IN
+2023-04-19 23:04:56,491 INFO  [restartedMain] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : addUser() OUT
+2023-04-19 23:04:56,492 INFO  [restartedMain] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : addUser() IN
+2023-04-19 23:04:56,492 INFO  [restartedMain] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : addUser() OUT
+2023-04-19 23:04:56,492 INFO  [restartedMain] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : addUser() IN
+2023-04-19 23:04:56,492 INFO  [restartedMain] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : addUser() OUT
+2023-04-19 23:04:56,492 INFO  [restartedMain] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : addUser() IN
+2023-04-19 23:04:56,492 INFO  [restartedMain] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : addUser() OUT
+2023-04-19 23:04:56,492 INFO  [restartedMain] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : addUser() IN
+2023-04-19 23:04:56,492 INFO  [restartedMain] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : addUser() OUT
+2023-04-19 23:04:56,492 INFO  [restartedMain] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : addUser() IN
+2023-04-19 23:04:56,492 INFO  [restartedMain] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : addUser() OUT
+2023-04-19 23:04:56,493 INFO  [restartedMain] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : addUser() IN
+2023-04-19 23:04:56,493 INFO  [restartedMain] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : addUser() OUT
+2023-04-19 23:04:56,493 INFO  [restartedMain] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : addUser() IN
+2023-04-19 23:04:56,493 INFO  [restartedMain] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : addUser() OUT
+2023-04-19 23:04:56,493 INFO  [restartedMain] com.ashwani.restwebservicedocker.controller.UserCommandLineRunner : run method -  User is initilized into DB   OUT
+2023-04-19 23:04:56,493 INFO  [restartedMain] com.ashwani.restwebservicedocker.controller.UserCommandLineRunner : ####################################################################################################
+2023-04-19 23:05:12,754 INFO  [http-nio-8080-exec-1] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-04-19 23:05:26,487 INFO  [http-nio-8080-exec-6] com.ashwani.restwebservicedocker.controller.UserRestController : getAllUsers() IN 
+  
+2023-04-19 23:05:26,488 INFO  [http-nio-8080-exec-6] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : getAllUsers() IN
+2023-04-19 23:05:26,488 INFO  [http-nio-8080-exec-6] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : getAllUsers() OUT
+2023-04-19 23:05:26,490 INFO  [http-nio-8080-exec-6] com.ashwani.restwebservicedocker.controller.UserRestController : getAllUsers() OUT 
+  <html>
+
+<head>
+
+<meta charset="ISO-8859-1">
+
+<title>Spring web application</title>
+
+</head>
+
+<body>
+
+	<table border=1 style="height: 100%; width: 100%; background-color: black; color: white">
+
+		<tr style="height: 10%">
+
+			<td></td>
+
+			<td><center>
+
+					<h1>Hello Docker - Get All Users</h1>
+
+					<br><p><h3>Hello Maven + Spring MVC + Jenkins + Docker Example</h3></p><br>
+
+				</center></td>
+
+			<td></td>
+
+		</tr>
+<tr  style=height: 80%><td><center>1</center></td>
+<td><center>Ashwani Rawat</center></td>
+<td><center>Date</center></td>
+<tr>
+<tr  style=height: 80%><td><center>2</center></td>
+<td><center>Mahesh Kumar</center></td>
+<td><center>Date</center></td>
+<tr>
+<tr  style=height: 80%><td><center>3</center></td>
+<td><center>Vikas Dube</center></td>
+<td><center>Date</center></td>
+<tr>
+<tr  style=height: 80%><td><center>4</center></td>
+<td><center>Atik Ahamad</center></td>
+<td><center>Date</center></td>
+<tr>
+<tr  style=height: 80%><td><center>5</center></td>
+<td><center>Yogi Aditya Nath</center></td>
+<td><center>Date</center></td>
+<tr>
+<tr  style=height: 80%><td><center>6</center></td>
+<td><center>Narendra Modi</center></td>
+<td><center>Date</center></td>
+<tr>
+<tr  style=height: 80%><td><center>7</center></td>
+<td><center>Madhuri Dixit</center></td>
+<td><center>Date</center></td>
+<tr>
+<tr  style=height: 80%><td><center>8</center></td>
+<td><center>Kangana Ranaut</center></td>
+<td><center>Date</center></td>
+<tr>
+<tr  style=height: 80%><td><center>9</center></td>
+<td><center>Amitabh Bacchan</center></td>
+<td><center>Date</center></td>
+<tr>
+		<tr  style="height: 10%">
+			<td></td>
+			<td><center>
+					@Ashwani 8 April 2023
+				</center></td>
+			<td></td>
+		</tr>
+	</table>
+</body>
+</html>
