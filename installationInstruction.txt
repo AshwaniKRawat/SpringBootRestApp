@@ -140,7 +140,7 @@ Now using Node Port
 apiVersion: v1
 kind: Service
 metadata:
- name: javawebappsvc
+ name: javawebappsvc  #(Java web application services)
 spec:
   type: NodePort
   selector:
@@ -165,8 +165,187 @@ NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
 javawebappsvc   NodePort    10.100.135.64   <none>        80:31187/TCP   102s
 kubernetes      ClusterIP   10.100.0.1      <none>        443/TCP        5m33s
 
-Note: Enable Node Port number in security group of Worker node in which our POD is running.
+Note: Enable Node Port number (31187) in security group of Worker node in which our POD is running.
 
 --------------------------------------------------------------------------------Approach 3:----------------------------------------------------------------------
 
 ---------------------------------------------------------------------------------Cluster IP----------------------------------------------------------------------
+kubectl delete all --all
+
+Not instead of   type= NodePort  I will use type: CluserIP  as below
+
+---
+apiVersion: v1
+kind: service
+metadata:
+ name: javawebappsvc
+Spec:
+ type: ClusterIP
+ selector:
+  app: javawebapp # POD lable
+ ports:
+ - port: 80
+   targetPort: 8080
+...   
+
+Now 
+$ kubectl delete all --all
+
+# Create PODS using pod-manifest
+$ kubectl apply -f <pod-yml>
+kubectl apply -f javawebapppod.yml
+	pod/javawebapppod created
+	
+
+# Create service using service-manifest
+kubectl apply -f javawebappsvc.yml
+	service/javawebappsvc created
+	
+ubuntu@ip-172-31-42-99:~/ASH/POD$ kubectl get pods
+		NAME            READY   STATUS    RESTARTS   AGE
+		javawebapppod   1/1     Running   0          53s
+
+ubuntu@ip-172-31-42-99:~/ASH/POD$ kubectl get svc
+		NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+		javawebappsvc   ClusterIP   10.100.80.129   <none>        80/TCP    50s
+		kubernetes      ClusterIP   10.100.0.1      <none>        443/TCP   3m44s
+		
+ubuntu@ip-172-31-42-99:~/ASH/POD$
+# Descrie pod ( get more info about pod)
+	$ kubectl describe pod <pod-name>
+	  kubectl describe pod javawebapppod
+	  
+# Check POD running in which Node
+
+ubuntu@ip-172-31-42-99:~/ASH/POD$  kubectl get pods -o wide
+NAME            READY   STATUS    RESTARTS   AGE     IP               NODE                                            NOMINATED NODE   READINESS GATES
+javawebapppod   1/1     Running   0          7m17s   192.168.54.177   ip-192-168-43-195.ap-south-1.compute.internal   <none>           <none>
+
+Note:  We cannot access application out of the cluster.  so we have to associate front end pod with Node Port.   Yes within the cluster we can use ClusterIP.  
+Example:  DB Pod and Backend application pod with interact with each other with ClusterIP.   Front End pod will also interact with backend podd with clusterIP but
+FrontEnd Pod need to associate with NodePort to access outside of the world.
+
+  
+
+----------------------------------------------------------------------Combined POD and SVC into single file---------------------------------------------------------
+Earlier we have 2 pods now we are combining the yml
+kubectl delete all --all
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: javawebapppod
+  labels:
+    app: javawebapp #very imp
+spec:
+  containers:
+  - name: javaweappcontainer
+    image: ashwanirawat/springbootrestservicedockerapp
+    ports:
+      - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: javawebappsvc
+spec:
+  type: NodePort
+  selector:
+    app: javawebapp  #POD label
+  ports:
+    - port: 80
+      targetPort: 8080
+      nodePort: 30785
+...
+
+file Name:  javawebapp.yml
+
+$ vi javawebapp.yml  and paste above into file
+$ kubectl apply -f javawebapp.yml
+
+ubuntu@ip-172-31-42-99:~/ASH/POD$ ls
+javawebapp.yml
+	ubuntu@ip-172-31-42-99:~/ASH/POD$ kubectl apply -f javawebapp.yml
+		pod/javawebapppod created
+		service/javawebappsvc created
+		
+	ubuntu@ip-172-31-42-99:~/ASH/POD$ kubectl get pods
+		NAME            READY   STATUS    RESTARTS   AGE
+		javawebapppod   1/1     Running   0          89s
+		
+	ubuntu@ip-172-31-42-99:~/ASH/POD$ kubectl get svc
+	NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+		javawebappsvc   NodePort    10.100.26.102   <none>        80:30785/TCP   104s
+		kubernetes      ClusterIP   10.100.0.1      <none>        443/TCP        2m39s
+
+	ubuntu@ip-172-31-42-99:~/ASH/POD$ kubectl get pods -o wide
+NAME            READY   STATUS    RESTARTS   AGE     IP               NODE                                            NOMINATED NODE   READINESS GATES
+javawebapppod   1/1     Running   0          3m32s   192.168.40.236   ip-192-168-43-195.ap-south-1.compute.internal   <none>           <none>
+
+Now search for ip-192-168-43-195.ap-south-1.compute.internal into cluster node and add 30785 port into security groupd and try to access the application
+
+access the application http://15.206.195.246:30785/
+
+
+--------------------------------------------------------------------------------Approach 3:----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------Load Balancer---------------------------------------------------------------------
+kubectl delete all --all
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: javawebapppod
+  labels:
+    app: javawebapp #very imp
+spec:
+  containers:
+  - name: javaweappcontainer
+    image: ashwanirawat/springbootrestservicedockerapp
+    ports:
+      - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: javawebappsvc
+spec:
+  type: LoadBalancer
+  selector:
+    app: javawebapp  #POD label
+  ports:
+    - port: 80
+      targetPort: 8080
+...
+
+
+Note:  Since I have given type as LoadBalancer so need of NodePort as I have given to above example
+================
+Terminal Output
+================
+
+		ubuntu@ip-172-31-42-99:~/ASH/POD$ ls
+										javawebapp.yml
+										
+		ubuntu@ip-172-31-42-99:~/ASH/POD$ kubectl apply -f javawebapp.yml
+										pod/javawebapppod created
+										service/javawebappsvc created
+										
+		ubuntu@ip-172-31-42-99:~/ASH/POD$ kubectl get pods
+		NAME            READY   STATUS    RESTARTS   AGE
+		javawebapppod   1/1     Running   0          13s
+		
+		ubuntu@ip-172-31-42-99:~/ASH/POD$ kubectl get svc
+NAME            TYPE           CLUSTER-IP      EXTERNAL-IP                                                               PORT(S)        AGE
+javawebappsvc   LoadBalancer   10.100.226.30   a762ce93d98444e77a19246a308fa8a5-639018561.ap-south-1.elb.amazonaws.com   80:31624/TCP   21s
+kubernetes      ClusterIP      10.100.0.1      <none>                                                                    443/TCP        6m12s
+
+
+Note:  Application is accessable using url given into EXTERNAL-IP  a762ce93d98444e77a19246a308fa8a5-639018561.ap-south-1.elb.amazonaws.com
+
+
+
+
+

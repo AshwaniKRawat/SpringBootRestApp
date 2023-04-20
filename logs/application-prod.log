@@ -2,3 +2,79 @@
   
 2023-04-20 00:01:00,814 INFO  [http-nio-8080-exec-4] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : getAllUsers() IN
 2023-04-20 00:01:00,814 INFO  [http-nio-8080-exec-4] com.ashwani.restwebservicedocker.dao.UserDataJpaRepositoryImpl : getAllUsers() OUT
+2023-04-20 00:01:00,814 INFO  [http-nio-8080-exec-4] com.ashwani.restwebservicedocker.controller.UserRestController : getAllUsers() OUT 
+  <html>
+
+<head>
+
+<meta charset="ISO-8859-1">
+
+<title>Spring web application</title>
+
+</head>
+
+<body>
+
+	<table border=1 style="height: 100%; width: 100%; background-color: black; color: white">
+
+		<tr style="height: 10%">
+
+			<td></td>
+
+			<td><center>
+
+					<h1>Hello Docker - Get All Users</h1>
+
+					<br><p><h3>Hello Maven + Spring MVC + Jenkins + Docker Example</h3></p><br>
+
+				</center></td>
+
+			<td></td>
+
+		</tr>
+<tr  style=height: 80%><td><center>1</center></td>
+<td><center>Ashwani Rawat</center></td>
+<td><center>Date</center></td>
+<tr>
+<tr  style=height: 80%><td><center>2</center></td>
+<td><center>Mahesh Kumar</center></td>
+<td><center>Date</center></td>
+<tr>
+<tr  style=height: 80%><td><center>3</center></td>
+<td><center>Vikas Dube</center></td>
+<td><center>Date</center></td>
+<tr>
+<tr  style=height: 80%><td><center>4</center></td>
+<td><center>Atik Ahamad</center></td>
+<td><center>Date</center></td>
+<tr>
+<tr  style=height: 80%><td><center>5</center></td>
+<td><center>Yogi Aditya Nath</center></td>
+<td><center>Date</center></td>
+<tr>
+<tr  style=height: 80%><td><center>6</center></td>
+<td><center>Narendra Modi</center></td>
+<td><center>Date</center></td>
+<tr>
+<tr  style=height: 80%><td><center>7</center></td>
+<td><center>Madhuri Dixit</center></td>
+<td><center>Date</center></td>
+<tr>
+<tr  style=height: 80%><td><center>8</center></td>
+<td><center>Kangana Ranaut</center></td>
+<td><center>Date</center></td>
+<tr>
+<tr  style=height: 80%><td><center>9</center></td>
+<td><center>Amitabh Bacchan</center></td>
+<td><center>Date</center></td>
+<tr>
+		<tr  style="height: 10%">
+			<td></td>
+			<td><center>
+					@Ashwani 8 April 2023
+				</center></td>
+			<td></td>
+		</tr>
+	</table>
+</body>
+</html>
