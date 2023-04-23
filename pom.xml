@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ashwani</groupId>
-	<artifactId>springbootwebapp</artifactId>
+	<artifactId>SpringBootRestApp</artifactId>
 	<version>0.0.1-REALEASE</version>
-	<name>springbootwebapp</name>
+	<name>SpringBootRestApp</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
