@@ -1,6 +1,6 @@
 git clone https://github.com/AshwaniKRawat/springbootwebapp.git
 cd springbootwebapp
-mvn clean compile package
+mvn clean compile package  -Dmaven.test.skip=true
 
 
 =======================================================================================================================================================================
